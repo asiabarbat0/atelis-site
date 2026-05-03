@@ -190,6 +190,10 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(16px);-webkit-back
 .field textarea{resize:vertical;min-height:80px}
 .form-submit{background:var(--white);color:var(--black);border:none;padding:0.9rem 2rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:opacity 0.2s,transform 0.15s;align-self:flex-start;margin-top:0.25rem}
 .form-submit:hover{opacity:0.88;transform:translateY(-1px)}
+  .form-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+  .thank-you{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem}
+  .thank-you .modal-title{margin-bottom:0}
+  .thank-you .modal-sub{margin-bottom:1rem}
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--black);display:flex;align-items:center;justify-content:space-between}
@@ -436,8 +440,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h2 class="modal-title">Let's see ATELIS on <em style="color:var(--silver)">your</em> store.</h2>
     <p class="modal-sub">Share a bit about your store and we'll set up a personalized demo using your actual product catalog. No generic walkthroughs.</p>
-    <form class="form" action="https://formspree.io/f/xaqankwb" method="POST">
-      <input type="hidden" name="_next" value="https://atelis.io">
+    <form id="demo-form" class="form" action="https://formspree.io/f/xaqankwb" method="POST">
       <div class="form-row">
         <div class="field"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
         <div class="field"><label>Store Name</label><input type="text" name="company" placeholder="Store name" required></div>
@@ -447,6 +450,11 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
       <div class="field"><label>Tell us about your store</label><textarea name="message" placeholder="What you sell, your location, current platform..."></textarea></div>
       <button type="submit" class="form-submit">Request Demo</button>
     </form>
+    <div id="thank-you" class="thank-you" style="display:none;">
+      <h2 class="modal-title">Thank you!</h2>
+      <p class="modal-sub">We've received your request and will be in touch shortly to schedule your personalized demo.</p>
+      <button class="form-submit" onclick="closeModal()">Close</button>
+    </div>
   </div>
 </div>
 
@@ -459,6 +467,50 @@ function openModal(){document.getElementById('modal').classList.add('open');docu
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
 function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Handle form submission
+const demoForm = document.getElementById('demo-form');
+const thankYou = document.getElementById('thank-you');
+
+demoForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = demoForm.querySelector('.form-submit');
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+  
+  try {
+    const response = await fetch(demoForm.action, {
+      method: 'POST',
+      body: new FormData(demoForm),
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (response.ok) {
+      demoForm.style.display = 'none';
+      thankYou.style.display = 'flex';
+    } else {
+      throw new Error('Form submission failed');
+    }
+  } catch (error) {
+    submitBtn.textContent = 'Request Demo';
+    submitBtn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  }
+});
+
+// Reset form when modal closes
+const originalCloseModal = closeModal;
+closeModal = function() {
+  originalCloseModal();
+  setTimeout(() => {
+    demoForm.style.display = 'flex';
+    thankYou.style.display = 'none';
+    demoForm.reset();
+    const submitBtn = demoForm.querySelector('.form-submit');
+    submitBtn.textContent = 'Request Demo';
+    submitBtn.disabled = false;
+  }, 300);
+};
 </script>
 </body>
 </html>
