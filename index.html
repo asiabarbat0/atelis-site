@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATELIS — Turn browsing into confident buying.</title>
+<link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
@@ -189,6 +190,10 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(16px);-webkit-back
 .field textarea{resize:vertical;min-height:80px}
 .form-submit{background:var(--white);color:var(--black);border:none;padding:0.9rem 2rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:opacity 0.2s,transform 0.15s;align-self:flex-start;margin-top:0.25rem}
 .form-submit:hover{opacity:0.88;transform:translateY(-1px)}
+  .form-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+  .thank-you{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem}
+  .thank-you .modal-title{margin-bottom:0}
+  .thank-you .modal-sub{margin-bottom:1rem}
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--black);display:flex;align-items:center;justify-content:space-between}
@@ -203,16 +208,112 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
 
 .hero-snap{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--silver);letter-spacing:0.02em;margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s 0.65s forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* HAMBURGER MENU */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:0.5rem;z-index:101}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:transform 0.3s,opacity 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
+
+/* MOBILE STYLES */
+@media(max-width:768px){
+  /* NAV */
+  nav{padding:1.2rem 1.5rem}
+  .hamburger{display:flex}
+  .nav-links{position:fixed;top:0;right:-100%;width:75%;max-width:300px;height:100vh;background:var(--dark);flex-direction:column;justify-content:center;align-items:center;gap:2rem;transition:right 0.3s ease;border-left:1px solid var(--border)}
+  .nav-links.open{right:0}
+  .nav-links a{font-size:0.9rem}
+  .nav-cta{padding:0.7rem 1.8rem!important}
+  
+  /* HERO */
+  .hero{padding:0 1.5rem 3rem;min-height:auto;padding-top:7rem}
+  .hero-headline{font-size:clamp(2.4rem,8vw,3.8rem)}
+  .hero-sub{font-size:0.9rem;max-width:100%}
+  .hero-label{font-size:0.6rem;margin-bottom:1.25rem}
+  .hero-advantage{font-size:0.68rem;margin-bottom:2rem}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:1.25rem}
+  .btn-primary{padding:0.85rem 2rem;font-size:0.72rem;width:100%;text-align:center}
+  .btn-ghost{font-size:0.72rem}
+  .hero-status{position:relative;bottom:auto;right:auto;text-align:left;margin-top:2.5rem}
+  .hero-snap{font-size:0.95rem}
+  
+  /* MARQUEE */
+  .marquee-track span{font-size:0.6rem}
+  
+  /* PROBLEM */
+  .problem{padding:4rem 1.5rem}
+  .problem-inner{grid-template-columns:1fr;gap:3rem}
+  .problem-headline{font-size:clamp(1.8rem,5vw,2.4rem)}
+  .problem-body{font-size:0.85rem}
+  .stats-grid{grid-template-columns:1fr}
+  .stat-card{padding:2rem 1.5rem}
+  .stat-num{font-size:3rem}
+  .stat-footer{grid-column:span 1}
+  
+  /* HOW */
+  .how{padding:4rem 1.5rem}
+  .how-header{flex-direction:column;align-items:flex-start;gap:1.5rem;margin-bottom:3rem}
+  .how-headline{font-size:clamp(1.8rem,5vw,2.4rem)}
+  .how-desc{text-align:left;max-width:100%;font-size:0.85rem}
+  .steps{grid-template-columns:1fr}
+  .step{padding:2rem 1.5rem}
+  .step-num{font-size:3.5rem;margin-bottom:1.5rem}
+  .step-body{font-size:0.82rem}
+  
+  /* PRODUCT */
+  .product{padding:4rem 1.5rem}
+  .product-headline{font-size:clamp(1.8rem,5vw,2.4rem)}
+  .mockup-body{grid-template-columns:1fr}
+  .mockup-col{padding:1.2rem}
+  .mockup-url{font-size:0.55rem}
+  
+  /* FEATURES */
+  .features{padding:4rem 1.5rem}
+  .features-headline{font-size:clamp(1.8rem,5vw,2.4rem);margin-bottom:2.5rem}
+  .features-grid{grid-template-columns:1fr}
+  .feature{padding:2rem 1.5rem}
+  .feature-title{font-size:0.75rem}
+  .feature-body{font-size:0.82rem}
+  
+  /* CTA */
+  .cta-band{padding:5rem 1.5rem}
+  .cta-headline{font-size:clamp(2rem,6vw,3rem)}
+  .cta-sub{font-size:0.85rem}
+  .cta-actions{flex-direction:column;gap:1.25rem}
+  .cta-actions .btn-primary{width:100%;text-align:center}
+  
+  /* FOOTER */
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+  
+  /* MODAL */
+  .modal{padding:2rem 1.5rem;width:95%}
+  .modal-title{font-size:1.6rem}
+  .form-row{grid-template-columns:1fr}
+  .form-submit{width:100%}
+}
+
+/* SMALL MOBILE */
+@media(max-width:480px){
+  .hero-headline{font-size:clamp(2rem,7vw,2.8rem)}
+  .stat-num{font-size:2.5rem}
+  .step-num{font-size:3rem}
+}
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <a href="#" class="nav-logo">ATELIS</a>
-  <ul class="nav-links">
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#" class="nav-cta" onclick="openModal();return false">Request Demo</a></li>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#how" onclick="closeMenu()">How It Works</a></li>
+    <li><a href="#features" onclick="closeMenu()">Features</a></li>
+    <li><a href="#" class="nav-cta" onclick="openModal();closeMenu();return false">Request Demo</a></li>
   </ul>
 </nav>
 
@@ -435,7 +536,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h2 class="modal-title">Let's see ATELIS on <em style="color:var(--silver)">your</em> store.</h2>
     <p class="modal-sub">Share a bit about your store and we'll set up a personalized demo using your actual product catalog. No generic walkthroughs.</p>
-    <form class="form" action="https://formspree.io/f/xaqankwb" method="POST">
+    <form id="demo-form" class="form" action="https://formspree.io/f/xaqankwb" method="POST">
       <div class="form-row">
         <div class="field"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
         <div class="field"><label>Store Name</label><input type="text" name="company" placeholder="Store name" required></div>
@@ -445,18 +546,73 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
       <div class="field"><label>Tell us about your store</label><textarea name="message" placeholder="What you sell, your location, current platform..."></textarea></div>
       <button type="submit" class="form-submit">Request Demo</button>
     </form>
+    <div id="thank-you" class="thank-you" style="display:none;">
+      <h2 class="modal-title">Thank you!</h2>
+      <p class="modal-sub">We've received your request and will be in touch shortly to schedule your personalized demo.</p>
+      <button class="form-submit" onclick="closeModal()">Close</button>
+    </div>
   </div>
 </div>
 
 <script>
 const nav=document.getElementById('nav');
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('nav-links');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function toggleMenu(){hamburger.classList.toggle('open');navLinks.classList.toggle('open');document.body.style.overflow=navLinks.classList.contains('open')?'hidden':''}
+function closeMenu(){hamburger.classList.remove('open');navLinks.classList.remove('open');document.body.style.overflow=''}
+
 function openModal(){document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
 function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeMenu()}});
+
+// Handle form submission
+const demoForm = document.getElementById('demo-form');
+const thankYou = document.getElementById('thank-you');
+
+demoForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = demoForm.querySelector('.form-submit');
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+  
+  try {
+    const response = await fetch(demoForm.action, {
+      method: 'POST',
+      body: new FormData(demoForm),
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (response.ok) {
+      demoForm.style.display = 'none';
+      thankYou.style.display = 'flex';
+    } else {
+      throw new Error('Form submission failed');
+    }
+  } catch (error) {
+    submitBtn.textContent = 'Request Demo';
+    submitBtn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  }
+});
+
+// Reset form when modal closes
+const originalCloseModal = closeModal;
+closeModal = function() {
+  originalCloseModal();
+  setTimeout(() => {
+    demoForm.style.display = 'flex';
+    thankYou.style.display = 'none';
+    demoForm.reset();
+    const submitBtn = demoForm.querySelector('.form-submit');
+    submitBtn.textContent = 'Request Demo';
+    submitBtn.disabled = false;
+  }, 300);
+};
 </script>
 </body>
 </html>
