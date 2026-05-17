@@ -58,8 +58,8 @@ body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif
 }
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.6rem 3rem;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent}
-nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--border)}
+nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;padding:1.6rem 3rem;background:var(--black);border-bottom:1px solid var(--border)}
+nav.scrolled{background:var(--black)}
 .nav-logo{font-family:'DM Sans',sans-serif;font-weight:300;font-size:1rem;letter-spacing:0.4em;color:var(--white);text-decoration:none}
 .nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
 .nav-links a{color:var(--muted-hi);text-decoration:none;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;transition:color 0.2s}
@@ -68,21 +68,20 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(16px);-webkit-back
 .nav-cta:hover{opacity:0.88!important}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 3rem;position:relative;overflow:hidden}
-.hero-video-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero-video-bg::after{content:'';position:absolute;inset:0;background:rgba(8,8,8,0.75);z-index:1}
-.hero-video-bg iframe{position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;min-height:100%;transform:translate(-50%,-50%);pointer-events:none}
-.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 50% 40%,rgba(210,210,210,0.04) 0%,transparent 65%);pointer-events:none;z-index:1}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1}
-.hero-content{position:relative;z-index:2;max-width:800px}
-.hero-label{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver);margin-bottom:1.75rem;position:relative;display:inline-flex;align-items:center;gap:0.8rem;opacity:0;animation:fadeUp 0.8s 0.2s forwards;justify-content:center}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding:0;position:relative;overflow:hidden;background:var(--black)}
+.hero-content{padding:0 4rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;background:var(--black)}
+.hero-panel{display:flex;align-items:center;justify-content:center;padding:2rem;padding-top:calc(80px + 4rem);background:var(--dark);border-left:1px solid var(--border)}
+.hero-panel-inner{width:100%;max-width:540px;aspect-ratio:16/10;position:relative;border-radius:6px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.5),0 0 0 1px var(--border-hi)}
+.hero-panel-inner iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+.hero-glow{position:absolute;left:0;top:0;bottom:0;width:50%;background:radial-gradient(ellipse 55% 45% at 70% 35%,rgba(210,210,210,0.05) 0%,transparent 65%),radial-gradient(ellipse 35% 50% at 15% 75%,rgba(210,210,210,0.03) 0%,transparent 60%);pointer-events:none;z-index:1}
+.hero-grid{position:absolute;left:0;top:0;bottom:0;width:50%;background-image:linear-gradient(rgba(255,255,255,0.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1}
+.hero-label{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver);margin-bottom:1.75rem;position:relative;display:flex;align-items:center;gap:0.8rem;opacity:0;animation:fadeUp 0.8s 0.2s forwards}
 .hero-label::before{content:'';display:inline-block;width:20px;height:1px;background:var(--silver);flex-shrink:0}
-.hero-label::after{content:'';display:inline-block;width:20px;height:1px;background:var(--silver);flex-shrink:0}
-.hero-headline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.8rem,7.5vw,7rem);line-height:1.02;letter-spacing:-0.015em;position:relative;margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.9s 0.35s forwards}
-.hero-sub{font-size:1rem;color:var(--muted-hi);max-width:520px;line-height:1.8;position:relative;margin:0 auto 1.5rem;opacity:0;animation:fadeUp 0.8s 0.5s forwards}
-.hero-advantage{font-size:0.75rem;color:var(--silver);letter-spacing:0.06em;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s 0.6s forwards;display:inline-flex;align-items:center;gap:0.6rem}
+.hero-headline{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.8rem,7.5vw,7rem);line-height:1.02;letter-spacing:-0.015em;max-width:820px;position:relative;margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.9s 0.35s forwards}
+.hero-sub{font-size:1rem;color:var(--muted-hi);max-width:520px;line-height:1.8;position:relative;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.5s forwards}
+.hero-advantage{font-size:0.75rem;color:var(--silver);letter-spacing:0.06em;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s 0.6s forwards;display:flex;align-items:center;gap:0.6rem}
 .hero-advantage::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--silver);flex-shrink:0}
-.hero-actions{display:flex;align-items:center;justify-content:center;gap:2.5rem;position:relative;opacity:0;animation:fadeUp 0.8s 0.7s forwards}
+.hero-actions{display:flex;align-items:center;gap:2.5rem;position:relative;opacity:0;animation:fadeUp 0.8s 0.7s forwards}
 .btn-primary{background:var(--white);color:var(--black);padding:0.9rem 2.4rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:opacity 0.2s,transform 0.2s;display:inline-block}
 .btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
 .btn-ghost{color:var(--muted-hi);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:0.6rem;transition:color 0.2s}
@@ -91,7 +90,7 @@ nav.scrolled{background:rgba(8,8,8,0.92);backdrop-filter:blur(16px);-webkit-back
 .btn-ghost-arr:hover::after{transform:translateY(3px)}
 .btn-ghost-demo::after{content:'→';transition:transform 0.2s;display:inline-block}
 .btn-ghost-demo:hover::after{transform:translateX(3px)}
-.hero-status{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);text-align:center;opacity:0;animation:fadeUp 0.8s 0.85s forwards;z-index:2}
+.hero-status{position:absolute;bottom:3rem;left:3rem;text-align:left;opacity:0;animation:fadeUp 0.8s 0.85s forwards;z-index:2}
 .hero-status-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);margin-bottom:0.3rem}
 .hero-status-text{font-size:0.78rem;color:var(--muted-hi);line-height:1.7}
 
@@ -224,19 +223,19 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
   .nav-links a{font-size:0.72rem;letter-spacing:0.2em}
   .nav-cta{border:1px solid rgba(255,255,255,0.3)!important;background:transparent!important;color:var(--white)!important;padding:0.9rem 2.2rem!important;font-weight:400!important}
   
-  /* HERO - Centered with video background */
-  .hero{min-height:100vh;min-height:100svh;padding:0 2rem}
-  .hero-video-bg{display:none}
-  .hero-content{padding:0}
+  /* HERO - Single column on mobile */
+  .hero{grid-template-columns:1fr;min-height:100vh;min-height:100svh}
+  .hero-content{padding:35vh 2rem 6rem;justify-content:flex-start}
+  .hero-panel{display:none}
+  .hero-glow,.hero-grid{width:100%}
   .hero-label{font-size:0.58rem;letter-spacing:0.25em;margin-bottom:2rem}
-  .hero-label::before,.hero-label::after{width:12px}
-  .hero-headline{font-size:clamp(2.8rem,11vw,4.2rem);line-height:1.0;margin-bottom:2rem}
+  .hero-headline{font-size:clamp(2.8rem,11vw,4.2rem);line-height:1.0;margin-bottom:2rem;max-width:100%}
   .hero-snap{font-size:1rem;margin-bottom:0;margin-top:0}
   .hero-sub{display:none}
   .hero-advantage{display:none}
-  .hero-actions{flex-direction:column;align-items:center;gap:1rem;margin-top:3rem;width:100%}
-  .btn-primary{padding:1.1rem 2rem;font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-align:center;border:none;width:100%;max-width:280px}
-  .btn-ghost{font-size:0.68rem;letter-spacing:0.12em;justify-content:center;padding:0.8rem 0;border:1px solid rgba(255,255,255,0.2);background:transparent;width:100%;max-width:280px}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:1rem;margin-top:3rem;width:100%;max-width:280px}
+  .btn-primary{padding:1.1rem 2rem;font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-align:center;border:none}
+  .btn-ghost{font-size:0.68rem;letter-spacing:0.12em;justify-content:center;padding:0.8rem 0;border:1px solid rgba(255,255,255,0.2);background:transparent}
   .hero-status{display:none}
   .hero-glow{opacity:0.6}
   .hero-grid{opacity:0.4}
@@ -340,9 +339,6 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-video-bg">
-    <iframe src="https://player.vimeo.com/video/1193054247?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="ATELIS Hero Video"></iframe>
-  </div>
   <div class="hero-glow"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
@@ -355,10 +351,15 @@ footer{border-top:1px solid var(--border);padding:2.25rem 3rem;background:var(--
       <a href="#" class="btn-primary" onclick="openModal();return false">Request a Demo</a>
       <a href="#how" class="btn-ghost btn-ghost-arr">See how it works</a>
     </div>
+    <div class="hero-status" style="position:relative;bottom:auto;left:auto;margin-top:4rem">
+      <div class="hero-status-label">Status</div>
+      <div class="hero-status-text">Currently onboarding pilot partners<br>across select Florida retailers.</div>
+    </div>
   </div>
-  <div class="hero-status">
-    <div class="hero-status-label">Status</div>
-    <div class="hero-status-text">Currently onboarding pilot partners across select Florida retailers.</div>
+  <div class="hero-panel">
+    <div class="hero-panel-inner">
+      <iframe src="https://player.vimeo.com/video/1193054247?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="ATELIS Demo"></iframe>
+    </div>
   </div>
 </section>
 
