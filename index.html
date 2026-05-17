@@ -71,9 +71,8 @@ nav.scrolled{background:var(--black)}
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 3rem;position:relative;overflow:hidden}
 .hero-left{position:relative;z-index:2;padding-right:2rem}
 .hero-right{display:flex;align-items:center;justify-content:center;padding:2rem 0}
-.hero-video-frame{position:relative;width:100%;max-width:520px;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:var(--black)}
+.hero-video-frame{position:relative;width:100%;max-width:520px;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:var(--surface);border:1px solid var(--border)}
 .hero-video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%}
-.hero-video-frame::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;box-shadow:inset 0 0 60px 30px var(--black),inset 0 0 20px 10px rgba(8,8,8,0.8);border-radius:12px}
 .hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 70% 35%,rgba(210,210,210,0.05) 0%,transparent 65%),radial-gradient(ellipse 35% 50% at 15% 75%,rgba(210,210,210,0.03) 0%,transparent 60%);pointer-events:none}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none}
 .hero-label{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver);margin-bottom:1.75rem;position:relative;display:flex;align-items:center;gap:0.8rem;opacity:0;animation:fadeUp 0.8s 0.2s forwards}
@@ -91,7 +90,7 @@ nav.scrolled{background:var(--black)}
 .btn-ghost-arr:hover::after{transform:translateY(3px)}
 .btn-ghost-demo::after{content:'→';transition:transform 0.2s;display:inline-block}
 .btn-ghost-demo:hover::after{transform:translateX(3px)}
-.hero-status{position:absolute;bottom:3rem;left:3rem;text-align:left;opacity:0;animation:fadeUp 0.8s 0.85s forwards}
+.hero-status{position:absolute;bottom:3rem;right:3rem;text-align:right;opacity:0;animation:fadeUp 0.8s 0.85s forwards}
 .hero-status-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);margin-bottom:0.3rem}
 .hero-status-text{font-size:0.78rem;color:var(--muted-hi);line-height:1.7}
 
